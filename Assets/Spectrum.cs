@@ -4,6 +4,7 @@ using System.Collections;
 public class Spectrum : MonoBehaviour {
 
     public GameObject prefab;
+    public GameObject core;
     public FFTWindow quality;
     public AudioSource AS;
     public AudioListener AL;
@@ -12,7 +13,7 @@ public class Spectrum : MonoBehaviour {
     public Material mat;
     public float r = 0.0F, g = 0.0F, b = 0.0F, v = 0.0F;
     public GameObject[] cubes;
-    float[] spectrum = new float[1024];
+    float[] spectrum = new float[4096];
     
     
 
@@ -41,6 +42,7 @@ public class Spectrum : MonoBehaviour {
             Vector3 previousScale = cubes[i].transform.localScale;
             previousScale.y = Mathf.Lerp(previousScale.y, spectrum[i] * 50, Time.deltaTime * 20);
             cubes[i].transform.localScale = previousScale;
+            cubes[i].transform.LookAt(core.transform);
         }
 	}
 
