@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class MenuScript : MonoBehaviour {
+public class MainMenuInterface : MonoBehaviour {
 
     public Canvas quitMenu;
     public Button startText;
