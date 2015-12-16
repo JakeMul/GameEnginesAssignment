@@ -9,7 +9,7 @@ public class Spectrum : MonoBehaviour {
     public AudioSource AS;
     public AudioListener AL;
     public int elementCount = 20;
-    public float radius = 5f;
+    public float radius = 5f, radius2, radius3;
     public Material mat;
     public float r = 0.0F, g = 0.0F, b = 0.0F, v = 0.0F;
     public GameObject[] cubes;
@@ -25,11 +25,18 @@ public class Spectrum : MonoBehaviour {
         b = PlayerPrefs.GetFloat("B");
         v = PlayerPrefs.GetFloat("V");
 
+        radius2 = radius - 1;
+        radius3 = radius2 - 1;
+
         for (int i = 0; i < elementCount; i++)
         {
             float angle = i * Mathf.PI * 2 / elementCount;
             Vector3 pos = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * radius;
+            Vector3 pos2 = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * radius2;
+            Vector3 pos3 = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * radius3;
             Instantiate(prefab, pos, Quaternion.identity);
+            Instantiate(prefab, pos2, Quaternion.identity);
+            Instantiate(prefab, pos3, Quaternion.identity);
         }
         cubes = GameObject.FindGameObjectsWithTag("Cubes");
 	}
