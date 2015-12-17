@@ -62,9 +62,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\MainMenuInterface.cs" />
-    <Compile Include="Assets\PlayerInterface.cs" />
-    <Compile Include="Assets\Spectrum.cs" />
+    <Compile Include="Assets\Scripts\CameraMove.cs" />
+    <Compile Include="Assets\Scripts\MainMenuInterface.cs" />
+    <Compile Include="Assets\Scripts\PlayerInterface.cs" />
+    <Compile Include="Assets\Scripts\RoseSpectrum.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
