@@ -37,7 +37,7 @@ public class Spectrum : MonoBehaviour {
             Vector3 pos2 = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * radius2;
             //Vector3 pos3 = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * radius3;
             Instantiate(prefab, pos, Quaternion.identity);
-            Instantiate(prefab, pos2, Quaternion.identity);
+            Instantiate(prefab2, pos2, Quaternion.identity);
             //Instantiate(prefab, pos3, Quaternion.identity);
         }
         cubes = GameObject.FindGameObjectsWithTag("Cubes");
@@ -55,7 +55,7 @@ public class Spectrum : MonoBehaviour {
             Vector3 previousScale = cubes[i].transform.localScale;
             Vector3 previousScale2 = cubes2[i].transform.localScale;
             previousScale.y = Mathf.Lerp(previousScale.y, spectrum[i] * 50, Time.deltaTime * 20);
-            previousScale2.y = Mathf.Lerp(previousScale2.y, spectrum[i] * 50, Time.deltaTime * 20);
+            previousScale2.y = Mathf.Lerp(previousScale2.y, spectrum[i] * 60, Time.deltaTime * 20);
             cubes[i].transform.localScale = previousScale;
             cubes[i].transform.LookAt(core.transform);
             cubes2[i].transform.localScale = previousScale2;
