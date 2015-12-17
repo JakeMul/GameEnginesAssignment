@@ -9,7 +9,8 @@ public class Spectrum : MonoBehaviour {
     public AudioSource AS;
     public AudioListener AL;
     public int elementCount = 20;
-    public float radius = 5f, radius2, radius3;
+    public float radius = 5f;
+    float radius2, radius3;
     public Material mat;
     public float r = 0.0F, g = 0.0F, b = 0.0F, v = 0.0F;
     public GameObject[] cubes;
@@ -28,7 +29,7 @@ public class Spectrum : MonoBehaviour {
         radius2 = radius - 1;
         radius3 = radius2 - 1;
 
-        for (int i = 0; i < elementCount; i++)
+        for (int i = 0; i < elementCount ; i++)
         {
             float angle = i * Mathf.PI * 2 / elementCount;
             Vector3 pos = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * radius;
@@ -44,12 +45,13 @@ public class Spectrum : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         AL.GetComponent<AudioSource>().GetSpectrumData(spectrum, 0, quality);
-        for (int i = 0; i < elementCount; i++)
+        for (int i = 0; i < elementCount * 3; i++)
         {
             Vector3 previousScale = cubes[i].transform.localScale;
             previousScale.y = Mathf.Lerp(previousScale.y, spectrum[i] * 50, Time.deltaTime * 20);
             cubes[i].transform.localScale = previousScale;
             cubes[i].transform.LookAt(core.transform);
+            mat.color = new Color(Random.Range(0.0F, 255.0F), Random.Range(0.0F, 255.0F), Random.Range(0.0F, 255.0F));
         }
 	}
 
@@ -60,7 +62,7 @@ public class Spectrum : MonoBehaviour {
         b = GUI.HorizontalSlider(new Rect(20, 60, Screen.width - 40, 20), b, 0.0F, 1.0F);
         v = GUI.HorizontalSlider(new Rect(20, 90, Screen.width - 40, 20), v, 0.0F, 1.0F);
 
-        mat.color = new Color(r, g, b);
+        
         AS.volume = v;
 
         PlayerPrefs.SetFloat("R", r);
