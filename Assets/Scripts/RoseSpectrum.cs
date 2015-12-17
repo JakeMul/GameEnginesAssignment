@@ -22,11 +22,6 @@ public class RoseSpectrum : MonoBehaviour {
     public GameObject[] cubes4;
 
     float[] spectrum = new float[4096];
-    
-    public void ChangeCount(int newCount)
-    {
-        elementCount = newCount;
-    }
 
     // Use this for initialization
     void Start () {
