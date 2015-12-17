@@ -4,14 +4,18 @@ using System.Collections;
 public class RoseSpectrum : MonoBehaviour {
 
     public GameObject prefab, prefab2, prefab3, prefab4;
+    [Range(5.0F, 10.0F)]
+    public float intensity = 5.0f;
     public GameObject core;
     public FFTWindow quality;
     public AudioSource AS;
     public AudioListener AL;
+    [Range(50, 200)]
     public int elementCount;
-    public float radius, radius2, radius3, radius4;
+    public float radius;
+    float radius2, radius3, radius4;
     public Material mat;
-    float r = 0.0F, g = 0.0F, b = 0.0F, v = 0.0F;
+    float r = 0.0F, g = 0.0F, b = 0.0F;
     public GameObject[] cubes;
     public GameObject[] cubes2;
     public GameObject[] cubes3;
@@ -30,7 +34,6 @@ public class RoseSpectrum : MonoBehaviour {
         r = PlayerPrefs.GetFloat("R");
         g = PlayerPrefs.GetFloat("G");
         b = PlayerPrefs.GetFloat("B");
-        v = PlayerPrefs.GetFloat("V");
         
         radius2 = radius - 2;
         radius3 = radius2 - 2;
@@ -74,10 +77,10 @@ public class RoseSpectrum : MonoBehaviour {
             Vector3 previousScale4 = cubes4[i].transform.localScale;
 
             //Smoothly transition between scales
-            previousScale.y = Mathf.Lerp(previousScale.y, spectrum[i] * 80, Time.deltaTime * 5);
-            previousScale2.y = Mathf.Lerp(previousScale2.y, spectrum[i] * 90, Time.deltaTime * 5);
-            previousScale3.y = Mathf.Lerp(previousScale3.y, spectrum[i] * 100, Time.deltaTime * 5);
-            previousScale4.y = Mathf.Lerp(previousScale4.y, spectrum[i] * 110, Time.deltaTime * 5);
+            previousScale.y = Mathf.Lerp(previousScale.y, spectrum[i] * 80, Time.deltaTime * intensity);
+            previousScale2.y = Mathf.Lerp(previousScale2.y, spectrum[i] * 90, Time.deltaTime * intensity);
+            previousScale3.y = Mathf.Lerp(previousScale3.y, spectrum[i] * 100, Time.deltaTime * intensity);
+            previousScale4.y = Mathf.Lerp(previousScale4.y, spectrum[i] * 110, Time.deltaTime * intensity);
 
             //Current scale becomes previous scale
             //Set cubes to face core
@@ -93,23 +96,23 @@ public class RoseSpectrum : MonoBehaviour {
         }
 
 	}
-
-    
     
     void OnGUI()
     {
-        r = GUI.HorizontalSlider(new Rect(20, 10, Screen.width - 40, 20), r, 0.0F, 1.0F);
-        g = GUI.HorizontalSlider(new Rect(20, 30, Screen.width - 40, 20), g, 0.0F, 1.0F);
-        b = GUI.HorizontalSlider(new Rect(20, 60, Screen.width - 40, 20), b, 0.0F, 1.0F);
-        v = GUI.HorizontalSlider(new Rect(20, 90, Screen.width - 40, 20), v, 0.0F, 1.0F);
 
+        GUI.backgroundColor = Color.yellow;
+        GUI.TextField(new Rect(0,5, 40, 20), "Red");
+        GUI.TextField(new Rect(0, 25, 40, 20), "Green");
+        GUI.TextField(new Rect(0, 55, 40, 20), "Blue");
+        r = GUI.HorizontalSlider(new Rect(50, 10, Screen.width - 100, 20), r, 0.0F, 1.0F);
+        g = GUI.HorizontalSlider(new Rect(50, 30, Screen.width - 100, 20), g, 0.0F, 1.0F);
+        b = GUI.HorizontalSlider(new Rect(50, 60, Screen.width - 100, 20), b, 0.0F, 1.0F);
+       
         mat.color = new Color(r, g, b);
-        AS.volume = v;
 
         PlayerPrefs.SetFloat("R", r);
         PlayerPrefs.SetFloat("G", g);
         PlayerPrefs.SetFloat("B", b);
-        PlayerPrefs.SetFloat("V", v);
     }
     
     
